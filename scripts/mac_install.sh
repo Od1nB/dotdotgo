@@ -17,3 +17,4 @@ fi
 ./scripts/brew_install.sh
 ./scripts/linkers.sh
 ./helix_install.sh
+./go_install.sh

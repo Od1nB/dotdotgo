@@ -6,6 +6,7 @@ brew install \
    regal \
    rust \
    git \
+   tree \
    postgresql@18 \
    k9s \
    kubectl

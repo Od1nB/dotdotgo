@@ -8,6 +8,8 @@ brew install \
    git \
    ghostty \
    tree \
+   shellcheck \
+   bash-language-server \
    postgresql@18 \
    k9s \
    kubectl

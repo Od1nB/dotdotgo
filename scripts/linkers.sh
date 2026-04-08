@@ -12,17 +12,17 @@ mkdir -p "$HOME/.config"
 DIRS="$REPO_ROOT/🏡/.config"
 
 for dir in "$DIRS/"*; do
-  [ -e "$dir" ] || continue
+	[ -e "$dir" ] || continue
 
-  name=$(basename "$dir")
-  target="$HOME/.config/$name"
+	name=$(basename "$dir")
+	target="$HOME/.config/$name"
 
-  rm -rf "$target"
+	rm -rf "$target"
 
-  # -s: symbolic link
-  # -f: overwrite other syms
-  # -n: prevents nesting
-  ln -sfn "$dir" "$target"
+	# -s: symbolic link
+	# -f: overwrite other syms
+	# -n: prevents nesting
+	ln -sfn "$dir" "$target"
 
-  echo "symlinked: $name"
+	echo "symlinked: $name"
 done

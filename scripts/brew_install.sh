@@ -9,6 +9,7 @@ brew install \
 	ghostty \
 	tree \
 	shellcheck \
+	awscli \
 	bash-language-server \
 	postgresql@18 \
 	k9s \

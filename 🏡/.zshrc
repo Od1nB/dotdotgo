@@ -1,14 +1,12 @@
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
-export GOPRIVATE=gitlab.tech.dnb.no/*
+export GOPRIVATE="gitlab.tech.dnb.no/*"
 
 PATH=$PATH:~/.cargo/bin/
 PATH=$PATH:$GOBIN
 
 setopt PROMPT_SUBST
 PROMPT='$(prompter)'
-
-source <(fzf --zsh)
 
 autoload -U compinit
 compinit
@@ -21,7 +19,8 @@ HISTSIZE=10000
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt EXTENDED_HISTORY
 
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source <(fzf --zsh)
+
 bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
-
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh

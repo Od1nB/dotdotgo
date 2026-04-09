@@ -5,9 +5,12 @@
 [pull]
 	rebase = true
 
+[push]
+	autoSetupRemote = true
+
 [url "ssh://git@gitlab.tech.dnb.no:2222/"]
-	insteadOf = https://gitlab.tech.dnb.no
-	insteadOf = git://gitlab.tech.dnb.no
+	insteadOf = https://gitlab.tech.dnb.no/
+	insteadOf = git://gitlab.tech.dnb.no/
 
 [user]
 	name = Odin Bjørnebo

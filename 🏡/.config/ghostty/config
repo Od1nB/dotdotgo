@@ -3,7 +3,7 @@
 background=221630
 background-opacity=0.95
 
-font-size=25
+font-size=22
 font-feature= -calt, -liga, -dlig
 
 # https://github.com/sahaj-b/ghostty-cursor-shaders

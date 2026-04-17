@@ -1,0 +1,19 @@
+
+#purple
+background=221630
+background-opacity=0.95
+
+font-size=22
+font-feature= -calt, -liga, -dlig
+
+# https://github.com/sahaj-b/ghostty-cursor-shaders
+custom-shader= shaders/cursor_tail.glsl
+cursor-color=e0b0ff
+
+keybind = super+left=goto_split:left
+keybind = super+right=goto_split:right
+keybind = super+up=goto_split:top
+keybind = super+down=goto_split:bottom
+
+keybind = super+n=new_tab
+keybind = super+d=new_split:right

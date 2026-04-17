@@ -24,5 +24,12 @@ for dir in "$DIRS/"*; do
 	# -n: prevents nesting
 	ln -sfn "$dir" "$target"
 
-	echo "symlinked: $name"
+	# Special handling for ghostty config
+	if [ "$name" = "ghostty" ]; then
+		OS=$(uname | tr '[:upper:]' '[:lower:]')
+		ln -sfn "$dir/config.$OS" "$target/config"
+		echo "symlinked: $name (config.$OS)"
+	else
+		echo "symlinked: $name"
+	fi
 done

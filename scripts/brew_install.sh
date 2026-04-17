@@ -24,6 +24,7 @@ brew install \
 	awscli \
 	terraform-ls \
 	bash-language-server \
+	yaml-language-server \
 	sqlite \
 	postgresql@18 \
 	k9s \

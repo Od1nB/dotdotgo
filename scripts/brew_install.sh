@@ -12,6 +12,7 @@ brew install \
 	taplo \
 	tombi \
 	git \
+	python \
 	gh \
 	zig \
 	zls \

@@ -4,6 +4,7 @@ export GOPRIVATE="gitlab.tech.dnb.no/*"
 
 PATH=$PATH:~/.cargo/bin/
 PATH=$PATH:$GOBIN
+PATH=$PATH:~/.local/bin
 
 setopt PROMPT_SUBST
 PROMPT='$(prompter)'

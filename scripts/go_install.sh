@@ -1,6 +1,13 @@
 #!/usr/bin/env sh
 set -eu
 
+has_go() {
+	if ! command -v go >/dev/null 2>&1; then
+		echo "go is not installed"
+		return 1
+	fi
+}
+
 DEPS="
 golang.org/x/tools/gopls@latest
 mvdan.cc/sh/v3/cmd/shfmt@latest 
@@ -13,6 +20,7 @@ github.com/docker/docker-language-server/cmd/docker-language-server@latest
 github.com/reteps/dockerfmt@latest
 "
 
+has_go
 for pkg in $DEPS; do
 	if ! go install "$pkg"; then
 		echo "failed to install $pkg"

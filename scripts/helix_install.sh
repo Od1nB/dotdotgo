@@ -1,4 +1,12 @@
 #!/usr/bin/env sh
+set -e
+
+has_cargo() {
+	if ! command -v cargo >/dev/null 2>&1; then
+		echo "cargo is not installed. cant install helix"
+		return 1
+	fi
+}
 
 readonly HELIX_DIR="$HOME/github/helix"
 
@@ -6,13 +14,9 @@ has_repo() {
 	if [ -d "$HELIX_DIR" ]; then
 		return 0
 	fi
+	echo "missing helix repo locally"
 	return 1
 }
-
-if ! has_repo; then
-	echo "missing helix repo locally"
-	exit 1
-fi
 
 install_cmd() {
 	cargo install \
@@ -21,13 +25,12 @@ install_cmd() {
 		--path helix-term \
 		--locked
 }
+
+has_cargo
+has_repo
 (
 	cd "$HELIX_DIR" || exit
-
-	if ! install_cmd; then
-		exit 1
-	fi
-
+	install_cmd
 	cp -r ./runtime ~/.config/helix/runtime
 )
 

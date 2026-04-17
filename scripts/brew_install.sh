@@ -30,6 +30,7 @@ brew install \
 	yaml-language-server \
 	sqlite \
 	postgresql@18 \
+	ruff \
 	k9s \
 	kubectl
 

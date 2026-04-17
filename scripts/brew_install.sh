@@ -9,6 +9,8 @@ brew install \
 	opa \
 	regal \
 	rust \
+	taplo \
+	tombi \
 	git \
 	gh \
 	zig \

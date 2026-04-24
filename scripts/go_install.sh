@@ -18,6 +18,7 @@ github.com/go-delve/delve/cmd/dlv@latest
 github.com/google/yamlfmt/cmd/yamlfmt@latest
 github.com/docker/docker-language-server/cmd/docker-language-server@latest
 github.com/reteps/dockerfmt@latest
+github.com/charmbracelet/gum@latest
 "
 
 has_go

@@ -9,6 +9,7 @@ brew install \
 	opa \
 	regal \
 	rust \
+	bat \
 	taplo \
 	tombi \
 	git \

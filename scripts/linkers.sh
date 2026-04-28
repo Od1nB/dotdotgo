@@ -5,6 +5,7 @@ REPO_ROOT=$(pwd)
 ln -sf "$REPO_ROOT/🏡/.gitconfig" ~/.gitconfig
 ln -sf "$REPO_ROOT/🏡/.gitconfig_github" ~/.gitconfig_github
 ln -sf "$REPO_ROOT/🏡/.gitconfig_gitlab" ~/.gitconfig_gitlab
+ln -sf "$REPO_ROOT/🏡/.gitconfig_ghe" ~/.gitconfig_ghe
 
 ln -sf "$PWD/🏡/.zshrc" ~/.zshrc
 

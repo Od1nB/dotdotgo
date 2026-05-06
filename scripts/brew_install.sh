@@ -26,6 +26,7 @@ brew install \
 	zsh-autosuggestions \
 	shellcheck \
 	awscli \
+	azure-cli \
 	terraform-ls \
 	bash-language-server \
 	yaml-language-server \

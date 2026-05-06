@@ -9,6 +9,7 @@ has_go() {
 }
 
 DEPS="
+github.com/Od1nB/prompter@latest
 golang.org/x/tools/gopls@latest
 mvdan.cc/sh/v3/cmd/shfmt@latest 
 honnef.co/go/tools/cmd/staticcheck@latest

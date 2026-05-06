@@ -1,6 +1,6 @@
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
-export GOPRIVATE="gitlab.tech.dnb.no/*"
+export GOPRIVATE="gitlab.tech.dnb.no/*,dnb.ghe.com/*"
 
 PATH=$PATH:~/.cargo/bin/
 PATH=$PATH:$GOBIN

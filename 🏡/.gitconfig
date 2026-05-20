@@ -13,8 +13,8 @@
 	insteadOf = git://gitlab.tech.dnb.no/
 
 [url "ssh://dnb@dnb.ghe.com/"]
-  insteadOf = https://dnb.ghe.com/
-  insteadOf = git://dnb.ghe.com/
+	insteadOf = https://dnb.ghe.com/
+	insteadOf = git://dnb.ghe.com/
 
 [user]
 	name = Odin Bjørnebo

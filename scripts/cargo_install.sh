@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -e
 
 has_cargo() {
@@ -10,4 +10,5 @@ has_cargo() {
 
 has_cargo
 cargo install \
-	rumdl
+	rumdl \
+	presenterm

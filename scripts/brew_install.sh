@@ -21,6 +21,7 @@ brew install \
 	tree \
 	docker \
 	markdown-oxide \
+	marksman \
 	gh \
 	btop \
 	zsh-autosuggestions \

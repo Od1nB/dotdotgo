@@ -11,6 +11,7 @@ PROMPT='$(prompter)'
 
 autoload -U compinit
 compinit
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'l:|=* r:|=*'
 
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY
@@ -25,5 +26,7 @@ source <(fzf --zsh)
 
 bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
+bindkey '^[[1;3D' backward-word # Alt+Left
+bindkey '^[[1;3C' forward-word  # Alt+Right
 
 alias python=python3

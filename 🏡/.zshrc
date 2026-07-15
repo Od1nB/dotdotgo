@@ -29,4 +29,7 @@ bindkey '\e[B' history-search-forward
 bindkey '^[[1;3D' backward-word # Alt+Left
 bindkey '^[[1;3C' forward-word  # Alt+Right
 
+alias week="date +%V"
+alias ls="ls -G"
+
 alias python=python3

@@ -29,7 +29,6 @@ language-servers = [ { name = "gopls" } ]
 [[language]]
 name = "rego"
 scope = "source.rego"
-roots = [".regal/config.yaml"]
 file-types = ["rego"]
 indent = { tab-width = 4, unit = "\t" }
 comment-token = "#"

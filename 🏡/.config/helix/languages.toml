@@ -8,6 +8,7 @@ completeUnimported = true
 [language-server.gopls.config]
 "ui.diagnostic.staticcheck" = true
 "formatting.gofumpt" = true
+# buildFlags = ["-tags=<flag>"]
 
 [language-server.gopls.config.hints]
 constantValues = true

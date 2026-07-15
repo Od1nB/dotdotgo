@@ -31,5 +31,6 @@ bindkey '^[[1;3C' forward-word  # Alt+Right
 
 alias week="date +%V"
 alias ls="ls -G"
+export WELL_KNOWN=".well-known/openid-configuration"
 
 alias python=python3

@@ -33,4 +33,13 @@ alias week="date +%V"
 alias ls="ls -G"
 export WELL_KNOWN=".well-known/openid-configuration"
 
+has_gum() {
+	if ! gum --version >/dev/null; then
+		print "missing ${PINK}Gum${RESET}!!? run: \
+		\n${ITALICS}\`go install github.com/charmbracelet/gum@latest\`${NORMAL} or\
+		\n${ITALICS}\`brew install gum\`${NORMAL}\n" >&2
+		return 1
+	fi
+}
+
 alias python=python3

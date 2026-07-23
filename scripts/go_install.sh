@@ -20,6 +20,7 @@ github.com/google/yamlfmt/cmd/yamlfmt@latest
 github.com/docker/docker-language-server/cmd/docker-language-server@latest
 github.com/reteps/dockerfmt@latest
 github.com/charmbracelet/gum@latest
+github.com/spf13/cobra-cli@latest
 "
 
 has_go

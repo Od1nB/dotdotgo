@@ -1,0 +1,70 @@
+include kitty.conf.common
+
+# UNTESTED. There is no Linux kitty install to verify this against; it is a
+# translation of kitty.conf.darwin with super+ in place of cmd+, matching the
+# modifier ghostty/config.linux already uses. Treat it as a starting point.
+#
+# Caveat that comes with super+: desktop environments grab it heavily (GNOME
+# especially), and a WM binding wins before kitty ever sees the key. Expect to
+# free some up at the WM level, or to fall back to ctrl+shift+.
+#
+# Omitted deliberately rather than translated:
+#   background_blur          -- Wayland-compositor dependent, not portable
+#   hide_window_decorations  -- `titlebar-only` is a macOS-only value
+#   macos_option_as_alt      -- macOS only
+#   macos_cycle_through_os_windows{,_backwards}  -- no Linux equivalent action
+
+font_size               15
+
+map super+shift+left    neighboring_window left
+map super+shift+right   neighboring_window right
+map super+shift+up      neighboring_window up
+map super+shift+down    neighboring_window down
+
+map super+n             new_tab_with_cwd
+
+# kitty's own default for this is ctrl+shift+alt+t, which stays live.
+map super+shift+r       set_tab_title
+
+map super+d             launch --location=vsplit --cwd=current
+map super+shift+d       launch --location=hsplit --cwd=current
+map super+shift+z       toggle_layout stack
+map super+shift+c       close_window
+
+map super+1             goto_tab 1
+map super+2             goto_tab 2
+map super+3             goto_tab 3
+map super+4             goto_tab 4
+map super+5             goto_tab 5
+map super+6             goto_tab 6
+map super+7             goto_tab 7
+map super+8             goto_tab 8
+map super+9             goto_tab 9
+
+map super+ctrl+n        new_os_window_with_cwd
+
+# The super+ half of the cwd-inheritance overrides explained in
+# kitty.conf.common; the ctrl+shift+ half is there, since it applies on both
+# platforms.
+map super+t             new_tab_with_cwd
+map super+enter         new_window_with_cwd
+
+# A custom kitten rather than `goto_session ~/.local/share/kitty/sessions`: the
+# built-in picker is a hint-letter list with no filtering, and the action has no
+# option to change that. The kitten lists the same directory and pipes it through
+# fzf, then hands the pick back to goto_session unchanged.
+map super+shift+w       kitten goto_session_fuzzy.py ~/.local/share/kitty/sessions
+map super+ctrl+shift+[  goto_session -1
+map super+shift+s       save_as_session --use-foreground-process --base-dir ~/.local/share/kitty/sessions
+
+# Prompts for a name, then opens a tab in this OS window belonging to a session
+# of that name. The new tab is focused, so it becomes the active session and the
+# tab_bar_filter above hides the previous session's tabs -- they are still in the
+# window, reachable through super+shift+w or `goto_session -1`. The session is
+# live-only until save_as_session writes a file for it.
+map super+shift+n       kitten new_session.py
+
+# Bare `close_session` asks which session to close. Deliberately not the `.`
+# (close active, no prompt) form: the ported session files do not reproduce
+# splits, so closing without re-saving first loses layout for good.
+map super+shift+x       close_session

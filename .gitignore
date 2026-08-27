@@ -2,3 +2,11 @@
 .config/helix/runtime
 *.config/helix/runtime/*
 *🏡/.config/helix/runtime/*
+
+# kitty compiles the kittens (tab_bar.py et al) on launch, into the config dir
+# -- which is a symlink to this repo.
+__pycache__/
+*.pyc
+
+# os variants symlinked to this name
+🏡/.config/kitty/kitty.conf

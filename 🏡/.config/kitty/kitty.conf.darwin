@@ -1,0 +1,67 @@
+include kitty.conf.common
+
+background_blur         20
+
+font_size               16
+
+hide_window_decorations titlebar-only
+
+macos_option_as_alt yes
+
+map cmd+shift+left      neighboring_window left
+map cmd+shift+right     neighboring_window right
+map cmd+shift+up        neighboring_window up
+map cmd+shift+down      neighboring_window down
+
+map cmd+n               new_tab_with_cwd
+
+# Rename the active tab. kitty's macOS default for this is cmd+shift+i, which
+# stays live; cmd+shift+r is the mnemonic. The prompt arrives pre-filled with
+# the current title -- clear it and press enter to fall back to the cwd label.
+# The name is per-tab, not per-session, and `new_tab <name>` is written into the
+# session file by cmd+shift+s, so a rename survives a save/reload.
+map cmd+shift+r         set_tab_title
+
+map cmd+d               launch --location=vsplit --cwd=current
+map cmd+shift+d         launch --location=hsplit --cwd=current
+map cmd+shift+z         toggle_layout stack
+map cmd+shift+c         close_window
+
+map cmd+1               goto_tab 1
+map cmd+2               goto_tab 2
+map cmd+3               goto_tab 3
+map cmd+4               goto_tab 4
+map cmd+5               goto_tab 5
+map cmd+6               goto_tab 6
+map cmd+7               goto_tab 7
+map cmd+8               goto_tab 8
+map cmd+9               goto_tab 9
+
+map cmd+ctrl+n          new_os_window_with_cwd
+map cmd+ctrl+]          macos_cycle_through_os_windows
+map cmd+ctrl+[          macos_cycle_through_os_windows_backwards
+
+# The cmd+ half of the cwd-inheritance overrides explained in kitty.conf.common;
+# the ctrl+shift+ half is there, since it applies on both platforms.
+map cmd+t               new_tab_with_cwd
+map cmd+enter           new_window_with_cwd
+
+# A custom kitten rather than `goto_session ~/.local/share/kitty/sessions`: the
+# built-in picker is a hint-letter list with no filtering, and the action has no
+# option to change that. The kitten lists the same directory and pipes it through
+# fzf, then hands the pick back to goto_session unchanged.
+map cmd+shift+w         kitten goto_session_fuzzy.py ~/.local/share/kitty/sessions
+map cmd+ctrl+shift+[    goto_session -1
+map cmd+shift+s         save_as_session --use-foreground-process --base-dir ~/.local/share/kitty/sessions
+
+# Prompts for a name, then opens a tab in this OS window belonging to a session
+# of that name. The new tab is focused, so it becomes the active session and the
+# tab_bar_filter above hides the previous session's tabs -- they are still in the
+# window, reachable through cmd+shift+w or `goto_session -1`. The session is
+# live-only until save_as_session writes a file for it.
+map cmd+shift+n         kitten new_session.py
+
+# Bare `close_session` asks which session to close. Deliberately not the `.`
+# (close active, no prompt) form: the ported session files do not reproduce
+# splits, so closing without re-saving first loses layout for good.
+map cmd+shift+x         close_session

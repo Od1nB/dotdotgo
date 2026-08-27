@@ -1,0 +1,165 @@
+default:
+  margin:
+    percent: 8
+  colors:
+    foreground: palette:fg
+    background: null
+slide_title:
+  alignment: center
+  padding_bottom: 1
+  padding_top: 1
+  colors:
+    foreground: palette:lavender
+  bold: true
+  font_size: 2
+headings:
+  h1:
+    prefix: "██"
+    colors:
+      foreground: palette:purple
+  h2:
+    prefix: "▓▓▓"
+    colors:
+      foreground: palette:pink
+  h3:
+    prefix: "▒▒▒▒"
+    colors:
+      foreground: palette:cyan
+  h4:
+    prefix: "░░░░░"
+    colors:
+      foreground: palette:ice
+  h5:
+    prefix: "░░░░░░"
+    colors:
+      foreground: palette:muted
+  h6:
+    prefix: "░░░░░░░"
+    colors:
+      foreground: palette:muted
+intro_slide:
+  title:
+    alignment: center
+    colors:
+      foreground: palette:lavender
+    font_size: 2
+  subtitle:
+    alignment: center
+    colors:
+      foreground: palette:cyan
+  event:
+    alignment: center
+    colors:
+      foreground: palette:purple
+  location:
+    alignment: center
+    colors:
+      foreground: palette:ice
+  date:
+    alignment: center
+    colors:
+      foreground: palette:orange
+  author:
+    alignment: center
+    colors:
+      foreground: palette:muted
+    positioning: page_bottom
+  footer: false
+code:
+  alignment: center
+  minimum_size: 50
+  minimum_margin:
+    percent: 8
+  theme_name: dracula-sublime
+  padding:
+    horizontal: 2
+    vertical: 1
+  # No opaque slab over the terminal blur.
+  background: false
+# Reads as a chip, echoing kitty's active tab.
+inline_code:
+  colors:
+    foreground: palette:green
+    background: palette:surface
+block_quote:
+  prefix: "▍ "
+  colors:
+    foreground: palette:fg
+    background: palette:surface
+    prefix: palette:pink
+alert:
+  prefix: "▍ "
+  base_colors:
+    foreground: palette:fg
+    background: palette:surface
+  styles:
+    note:
+      color: palette:blue
+    tip:
+      color: palette:green
+    important:
+      color: palette:purple
+    warning:
+      color: palette:orange
+    caution:
+      color: palette:red
+typst:
+  colors:
+    foreground: palette:fg
+# Background left unset here too, so snippet output keeps the blur.
+execution_output:
+  colors:
+    foreground: palette:fg
+  status:
+    running:
+      foreground: palette:cyan
+    success:
+      foreground: palette:green
+    failure:
+      foreground: palette:red
+    not_started:
+      foreground: palette:muted
+  padding:
+    horizontal: 2
+    vertical: 1
+pty_output:
+  colors:
+    foreground: palette:fg
+  cursor:
+    # kitty's `cursor` / `cursor_text_color` pair, reproduced exactly.
+    highlight_colors:
+      foreground: palette:bg
+      background: palette:lavender
+# Only {current_slide}/{total_slides}: referencing a front matter key that a given
+# presentation omits (e.g. {author}) is a hard error, not a silent blank.
+footer:
+  style: template
+  right: "{current_slide} / {total_slides}"
+modals:
+  selection_colors:
+    foreground: palette:lavender
+layout_grid:
+  color: palette:surface
+mermaid:
+  background: transparent
+  theme: dark
+d2:
+  theme: 200
+palette:
+  colors:
+    bg: "221630" # background -- only used as cursor text
+    surface: "3a2450" # active_tab_background / inactive_border_color
+    muted: "8a7a9b" # inactive_tab_foreground
+    pink: "ff6ec7" # active_border_color
+    # helix cygnus.toml
+    fg: "e2d8e3" # foreground
+    lavender: "e0b0ff" # light_purple, and kitty's cursor
+    purple: "c16bff" # dark_purple
+    cyan: "8ffffb" # cyan
+    blue: "5a4deb" # dark_blue
+    ice: "cfefff" # variable.parameter
+    # dracula, which cygnus inherits
+    green: "50fa7b"
+    orange: "ffb86c"
+    red: "ff5555"
+    yellow: "f1fa8c"

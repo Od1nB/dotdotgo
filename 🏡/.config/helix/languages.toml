@@ -1,3 +1,9 @@
+[[language]]
+name = "go"
+auto-format = true
+formatter = {command = "goimports"}
+language-servers = [ { name = "gopls" } ]
+
 [language-server.gopls]
 command = "gopls"
 # args = ["-logfile=/tmp/gopls.log",  "serve"]
@@ -19,12 +25,6 @@ rangeVariableTypes = true
 compositeLiteralTypes = true
 compositeLiteralFields = true
 functionTypeParameters = true
-
-[[language]]
-name = "go"
-auto-format = true
-formatter = {command = "goimports"}
-language-servers = [ { name = "gopls" } ]
 
 [[language]]
 name = "rego"

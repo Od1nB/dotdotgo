@@ -9,4 +9,8 @@ __pycache__/
 *.pyc
 
 # os variants symlinked to this name
-🏡/.config/kitty/kitty.conf
+*🏡/.config/kitty/kitty.conf
+*🏡/.config/ghostty/config.ghostty
+🏡/.config/ghostty/config
+*🏡/.config/ghostty/config
+

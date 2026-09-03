@@ -42,9 +42,10 @@ hl.monitor({
 -- Set programs that you use
 local terminal    = "kitty"
 local fileManager = "dolphin"
-local menu        = [[t=$(cat "${XDG_STATE_HOME:-$HOME/.local/state}/roma/toga" 2>/dev/null); ]]
-                 .. [[ [ -f "$HOME/.config/wofi/style.css.$t" ] || t=purpura; ]]
-                 .. [[exec wofi --show drun -I --style "$HOME/.config/wofi/style.css.$t"]]
+local menu        = [[cd "${HOME}/.config/wofi" || exit; ]]
+                 .. [[t=$(cat "${XDG_STATE_HOME:-$HOME/.local/state}/roma/toga" 2>/dev/null); ]]
+                 .. [[ [ -f "${HOME}/.config/wofi/style.css.$t" ] || t=purpura; ]]
+                 .. [[exec wofi --show drun -I --style "${HOME}/.config/wofi/style.css.${t}"]]
 
 
 -------------------

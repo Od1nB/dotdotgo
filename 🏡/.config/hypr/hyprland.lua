@@ -23,16 +23,16 @@ hl.monitor({
 })
 
 
--- hl.monitor({
---     output        = "DP-3",
---     mode          = "3440x1440@175.00",
---     position      = "0x0",
---     scale         = "1",
--- 		cm            = "hdr",
--- 		bitdepth      = 10,
--- 		sdrbrightness = 1.3,
---     sdrsaturation = 1.2,
--- })
+hl.monitor({
+    output        = "DP-3",
+    mode          = "3440x1440@175.00",
+    position      = "0x0",
+    scale         = "1",
+		cm            = "hdr",
+		bitdepth      = 10,
+		sdrbrightness = 1.3,
+    sdrsaturation = 1.2,
+})
 
 
 ---------------------

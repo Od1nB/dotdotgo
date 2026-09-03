@@ -324,7 +324,7 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
-hl.bind("INS", hl.dsp.exec_cmd("grim -g \"$(slurp -b 33292baa -c ff5c54ff -F 'JetBrains Mono' -d)\" \"${HOME}/Pictures/Screenshot-$(date --iso=ns|head -c 22).png\""))
+hl.bind("PRINT", hl.dsp.exec_cmd("grim -g \"$(slurp -b 33292baa -c ff5c54ff -F 'JetBrains Mono' -d)\" \"${HOME}/Pictures/Screenshot-$(date --iso=ns|head -c 22).png\""))
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("grim \"${HOME}/Pictures/Screenshot-$(date --iso=ns|head -c 22).png\""))
 
 

@@ -1,0 +1,19 @@
+@define-color ground       #160D1F;
+@define-color surface      #221630;
+@define-color raised       #33203F;
+@define-color rule         #4A2F5C;
+
+@define-color text         #EDE3D4;
+@define-color textAlt      #E0B0FF;
+@define-color muted        #8A7A9B;
+
+@define-color accent       #E8B23C;
+@define-color accentBright #F7D678;
+@define-color accentDim    #A9762F;
+
+@define-color ok           #8FBF5A;
+@define-color info         #7FC7D9;
+@define-color warn         #E0913C;
+@define-color crit         #D2402F;
+
+@import url("style.css.common");

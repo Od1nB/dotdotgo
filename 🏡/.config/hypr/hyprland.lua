@@ -64,7 +64,6 @@ local menu        = [[cd "${HOME}/.config/wofi" || exit; ]]
 -- end)
 
 hl.on("hyprland.start", function ()
-    hl.exec_cmd("mako")
     hl.exec_cmd("steam")
     hl.exec_cmd("steam steam://open/friends/")
 end)

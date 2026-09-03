@@ -65,6 +65,7 @@ local menu        = [[t=$(cat "${XDG_STATE_HOME:-$HOME/.local/state}/roma/toga" 
 hl.on("hyprland.start", function ()
     hl.exec_cmd("mako")
     hl.exec_cmd("steam")
+    hl.exec_cmd("steam steam://open/friends/")
 end)
 
 
@@ -86,13 +87,13 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -- Please note permission changes here require a Hyprland restart and are not applied on-the-fly
 -- for security reasons
 
--- hl.config({
---   ecosystem = {
---     enforce_permissions = true,
---   },
--- })
+hl.config({
+  ecosystem = {
+    enforce_permissions = true,
+  },
+})
 
--- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
+hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
 -- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
 -- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
 
@@ -322,6 +323,9 @@ hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = tr
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
+
+hl.bind("INS", hl.dsp.exec_cmd("grim -g \"$(slurp -b 33292baa -c ff5c54ff -F 'JetBrains Mono' -d)\" \"${HOME}/Pictures/Screenshot-$(date --iso=ns|head -c 22).png\""))
+hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("grim \"${HOME}/Pictures/Screenshot-$(date --iso=ns|head -c 22).png\""))
 
 
 --------------------------------

@@ -9,6 +9,28 @@
 -- Create your files separately and then require them like this:
 -- require("myColors")
 
+local Themes = {
+    purpura = {
+        name = "purpura"
+    },
+    marmor = {
+        name = "marmor"
+    },
+    vexillum = {
+        name = "vexillum"
+    }
+}
+
+local function active_theme()
+    local default = "purpura"
+    local file = io.open(os.getenv("HOME") .. "/.local/state/roma/toga", "r")
+    if not file then return default end
+    local content = file:read("*all")
+    file:close()
+
+    local theme_config = Themes[content:gsub("%s+", ""):lower()] or Themes.purpura
+    return theme_config
+end
 
 ------------------
 ---- MONITORS ----
@@ -38,14 +60,14 @@ hl.monitor({
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
+local theme = active_theme()
+os.execute(string.format("notify-send 'the dbuggo' '%s'", theme.name))
 
 -- Set programs that you use
 local terminal    = "kitty"
 local fileManager = "dolphin"
-local menu        = [[cd "${HOME}/.config/wofi" || exit; ]]
-                 .. [[t=$(cat "${XDG_STATE_HOME:-$HOME/.local/state}/roma/toga" 2>/dev/null); ]]
-                 .. [[ [ -f "${HOME}/.config/wofi/style.css.$t" ] || t=purpura; ]]
-                 .. [[exec wofi --show drun -I --style "${HOME}/.config/wofi/style.css.${t}"]]
+local menu = [[cd "${HOME}/.config/wofi" || exit; ]]
+          .. [[exec wofi --show drun -I --style "${HOME}/.config/wofi/style.css.]] .. theme.name .. [["]]
 
 
 -------------------
@@ -62,11 +84,17 @@ local menu        = [[cd "${HOME}/.config/wofi" || exit; ]]
 --   hl.exec_cmd("nm-applet")
 --   hl.exec_cmd("waybar & hyprpaper & firefox")
 -- end)
+local theme_fp = os.getenv("HOME") .. "/.local/state/roma/toga"
 
 hl.on("hyprland.start", function ()
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("steam")
     hl.exec_cmd("steam steam://open/friends/")
+    hl.exec_cmd(string.format([[
+        while inotifywait -e modify %s &>/dev/null; do
+            hyprctl reload
+        done
+    ]], theme_fp))
 end)
 
 

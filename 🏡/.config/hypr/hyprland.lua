@@ -412,7 +412,7 @@ hl.window_rule({
 				 class = "^steam$",
 				 title = "^Friends.*$"
 			},
-			workspace = "4"
+			workspace = "4 silent"
 })
 
 hl.window_rule({
@@ -420,5 +420,5 @@ hl.window_rule({
 				 class = "^steam$",
 				 title = "^Steam$"
 			},
-			workspace = "4"
+			workspace = "4 silent"
 })

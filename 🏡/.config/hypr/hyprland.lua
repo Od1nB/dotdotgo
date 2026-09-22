@@ -236,7 +236,8 @@ hl.config({
 -- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
 hl.config({
     master = {
-        new_status = "master",
+        mfact = 0.80,
+        new_status = "slave",
     },
 })
 
@@ -407,11 +408,25 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    match = {
+        class = "google-chrome"
+    },
+    workspace = "2"
+})
+
+
+hl.workspace_rule({
+    workspace = "4",
+    layout = "master",
+    layout_opts = {orientation = "left"}
+})
+
+hl.window_rule({
 			match = {
 				 class = "^steam$",
 				 title = "^Friends.*$"
 			},
-			workspace = "4 silent"
+			workspace = "4 silent",
 })
 
 hl.window_rule({
@@ -419,5 +434,5 @@ hl.window_rule({
 				 class = "^steam$",
 				 title = "^Steam$"
 			},
-			workspace = "4 silent"
+			workspace = "4 silent",
 })

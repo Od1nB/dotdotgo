@@ -87,6 +87,7 @@ local theme_fp = os.getenv("HOME") .. "/.local/state/roma/toga"
 
 hl.on("hyprland.start", function ()
     hl.exec_cmd("hyprpaper")
+    hl.exec_cmd("quickshell --config ~/.config/quickshell/roma")
     hl.exec_cmd("steam")
     hl.exec_cmd("steam steam://open/friends/")
     hl.exec_cmd(string.format([[

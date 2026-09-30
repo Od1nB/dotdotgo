@@ -1,0 +1,162 @@
+default:
+  margin:
+    percent: 8
+  colors:
+    foreground: palette:text
+    background: null
+slide_title:
+  alignment: center
+  padding_bottom: 1
+  padding_top: 1
+  colors:
+    foreground: palette:accent_bright
+  bold: true
+  font_size: 2
+headings:
+  h1:
+    prefix: "██"
+    colors:
+      foreground: palette:accent
+  h2:
+    prefix: "▓▓▓"
+    colors:
+      foreground: palette:text_alt
+  h3:
+    prefix: "▒▒▒▒"
+    colors:
+      foreground: palette:info
+  h4:
+    prefix: "░░░░░"
+    colors:
+      foreground: palette:accent_dim
+  h5:
+    prefix: "░░░░░░"
+    colors:
+      foreground: palette:muted
+  h6:
+    prefix: "░░░░░░░"
+    colors:
+      foreground: palette:muted
+intro_slide:
+  title:
+    alignment: center
+    colors:
+      foreground: palette:accent_bright
+    font_size: 2
+  subtitle:
+    alignment: center
+    colors:
+      foreground: palette:info
+  event:
+    alignment: center
+    colors:
+      foreground: palette:accent
+  location:
+    alignment: center
+    colors:
+      foreground: palette:text_alt
+  date:
+    alignment: center
+    colors:
+      foreground: palette:warn
+  author:
+    alignment: center
+    colors:
+      foreground: palette:muted
+    positioning: page_bottom
+  footer: false
+code:
+  alignment: center
+  minimum_size: 50
+  minimum_margin:
+    percent: 8
+  # A syntect theme, a different namespace from the palette below -- it cannot be
+  # driven by purpura's hexes, so it stays what cygnus picked. Note the name:
+  # cygnus says `dracula-sublime`, which presenterm 0.16.1 rejects outright. The
+  # bundled theme is registered as `Dracula`; `dracula-sublime` is only the name of
+  # the directory it ships in.
+  theme_name: Dracula
+  padding:
+    horizontal: 2
+    vertical: 1
+  background: false
+inline_code:
+  colors:
+    foreground: palette:ok
+    background: palette:raised
+block_quote:
+  prefix: "▍ "
+  colors:
+    foreground: palette:text
+    background: palette:raised
+    prefix: palette:accent
+alert:
+  prefix: "▍ "
+  base_colors:
+    foreground: palette:text
+    background: palette:raised
+  styles:
+    note:
+      color: palette:info
+    tip:
+      color: palette:ok
+    important:
+      color: palette:text_alt
+    warning:
+      color: palette:warn
+    caution:
+      color: palette:crit
+typst:
+  colors:
+    foreground: palette:text
+execution_output:
+  colors:
+    foreground: palette:text
+  status:
+    running:
+      foreground: palette:info
+    success:
+      foreground: palette:ok
+    failure:
+      foreground: palette:crit
+    not_started:
+      foreground: palette:muted
+  padding:
+    horizontal: 2
+    vertical: 1
+pty_output:
+  colors:
+    foreground: palette:text
+  cursor:
+    highlight_colors:
+      foreground: palette:surface
+      background: palette:text_alt
+footer:
+  style: template
+  right: "{current_slide} / {total_slides}"
+modals:
+  selection_colors:
+    foreground: palette:accent
+layout_grid:
+  color: palette:rule
+mermaid:
+  background: transparent
+  theme: dark
+d2:
+  theme: 200
+palette:
+  colors:
+    ground: "160D1F" # nox -- deeper than the terminals on purpose
+    surface: "221630" # porphyrus -- byte-for-byte kitty's and ghostty's background
+    raised: "33203F" # murex -- the sea snail the dye came from
+    rule: "4A2F5C" # vinum -- wine; hairlines and column flutes
+    text: "EDE3D4" # marmor -- marble, not lilac: warm, because gold is the accent
+    text_alt: "E0B0FF" # lavendula -- kept from cygnus: kitty's cursor
+    muted: "8A7A9B" # cinis -- ash; cygnus `muted`, untouched
+    accent: "E8B23C" # aurum -- gold. sits in #ff6ec7's old seat
+    accent_bright: "F7D678" # aurumClarum -- hover, focus, sheen
+    accent_dim: "A9762F" # aes -- bronze; second-tier, separators
+    ok: "8FBF5A" # laurus -- laurel
+    info: "7FC7D9" # aqua -- the aqueducts
+    warn: "E0913C" # terracotta
+    crit: "D2402F" # sanguis

@@ -70,7 +70,7 @@ code:
   minimum_size: 50
   minimum_margin:
     percent: 8
-  theme_name: dracula-sublime
+  theme_name: Dracula
   padding:
     horizontal: 2
     vertical: 1

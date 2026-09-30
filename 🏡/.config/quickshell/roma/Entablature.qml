@@ -87,6 +87,8 @@ PanelWindow {
 			Nuntii {anchors.verticalCenter: parent.verticalCenter}
 			Columna {anchors.verticalCenter: parent.verticalCenter}
 			Hora {anchors.verticalCenter: parent.verticalCenter}
+			Columna {anchors.verticalCenter: parent.verticalCenter}
+			Vale {anchors.verticalCenter: parent.verticalCenter}
 		}
 
 		Titulus {

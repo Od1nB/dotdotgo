@@ -68,7 +68,8 @@ Singleton {
 			"hodie": "HODIE", // today; the link back from a month you navigated away from
 			"vigilia": "VIGILIA", // uptime, a night-watch shift (unused for now)
 			"ludi": "LUDI", // gamemode, the public games   (unused for now)
-			"toga": "TOGA" // scheme switch
+			"toga": "TOGA", // scheme switch
+			"vale": "VALE" // poweroff
 		})
 
 	function label(key: string): string {return root.inscribe(root.labels[key] || key)}
@@ -84,7 +85,9 @@ Singleton {
 			"viaDown": "VIA INTERRUPTA", // the road is cut
 			"nuntiiCrit": "ERRARE HUMANUM EST", // to err is human
 			"ludi": "PANEM ET CIRCENSES", // bread and circuses          -- Juvenal
-			"vigilia": "DUM SPIRO SPERO" // while I breathe, I hope
+			"vigilia": "DUM SPIRO SPERO", // while I breathe, I hope
+			"vale": "VALE", // farewell
+			"valeArmed": "MORITURI TE SALUTANT" // those about to die salute you
 		})
 	function motto(key: string): string {return root.inscribe(root.mottos[key] || "")}
 }

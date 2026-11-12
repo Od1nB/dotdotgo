@@ -15,3 +15,5 @@ __pycache__/
 *🏡/.config/ghostty/config
 
 *.DS_Store
+
+*._*qml

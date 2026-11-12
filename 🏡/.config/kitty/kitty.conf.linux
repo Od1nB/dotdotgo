@@ -1,6 +1,6 @@
 include kitty.conf.common
 
-font_size               15
+font_size               13
 
 map super+shift+left    neighboring_window left
 map super+shift+right   neighboring_window right

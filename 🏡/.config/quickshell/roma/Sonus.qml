@@ -24,7 +24,9 @@ Modulus {
 	valueColor: !audio ? Theme.muted : audio.muted ? Theme.muted : audio.volume > 1.0 ? Theme.warn : Theme.text
 
 	onActivated: button => {
-		if (button === Qt.LeftButton && audio)
+		if (button === Qt.RightButton)
+			Velum.toggle(root, "exitus")
+		else if (button === Qt.LeftButton && audio)
 			audio.muted = !audio.muted
 	}
 

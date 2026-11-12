@@ -74,6 +74,13 @@ Singleton {
 	// looking like a lozenge.
 	readonly property int radius: 6
 
+	// The drawers that fold down out of the bar (Sinus). drawerMax is the most they
+	// may ever hang; the bar's window is that much taller, transparent and masked.
+	readonly property int drawerMax: 420
+	readonly property int drawerRadius: 10 // both the fillet into the bar and the lower corners
+	readonly property int drawerPad: 12
+	readonly property int drawerWidth: 300
+
 	property bool stateLayers: true
 	property bool showLabels: true
 	property bool orthographia: true

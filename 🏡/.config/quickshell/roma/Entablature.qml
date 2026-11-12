@@ -10,19 +10,29 @@ PanelWindow {
 	anchors.top: true
 	anchors.left: true
 	anchors.right: true
-	implicitHeight: Theme.barHeight + Theme.corniceHeight
-	color: Theme.barColor
+
+	implicitHeight: Theme.barHeight + Theme.corniceHeight + Theme.drawerMax
+	color: "transparent"
+	exclusionMode: ExclusionMode.Normal
+	exclusiveZone: Theme.barHeight + Theme.corniceHeight
+	mask: Region {
+		item: band
+		Region {item: sinus}
+	}
+
 	WlrLayershell.namespace: "roma"
 	visible: !retracted
 	property bool retracted: false
-	onRetractedChanged: if (retracted) Kalendarium.close()
+	onRetractedChanged: if (retracted) {
+		Kalendarium.close()
+		if (sinus.mine)
+			Velum.close()
+	}
 
 	Connections {
 		target: Hyprland
 
 		function onRawEvent(event: HyprlandEvent): void {
-			// Hyprland emits `fullscreen>>1` and `fullscreen>>0` for the focused
-			// window entering and leaving fullscreen.
 			if (event.name === "fullscreen") {
 				root.retracted = event.data === "1"
 				return
@@ -32,6 +42,23 @@ PanelWindow {
 				root.retracted = false
 		}
 	}
+	Rectangle {
+		id: band
+		anchors.left: parent.left
+		anchors.right: parent.right
+		anchors.top: parent.top
+		height: Theme.barHeight + Theme.corniceHeight
+		color: Theme.barColor
+
+		Rectangle {
+			anchors.left: parent.left
+			anchors.right: parent.right
+			anchors.bottom: parent.bottom
+			height: Theme.corniceHeight
+			color: Theme.accent
+		}
+	}
+
 	Item {
 		id: frieze
 
@@ -77,6 +104,7 @@ PanelWindow {
 				spacing: Theme.groupGap
 
 				Sonus {}
+				Vox {}
 				Via {}
 				Calor {}
 				Onus {}
@@ -101,12 +129,10 @@ PanelWindow {
 		}
 	}
 
-	Rectangle {
-		anchors.left: parent.left
-		anchors.right: parent.right
-		anchors.bottom: parent.bottom
-		height: Theme.corniceHeight
-		color: Theme.accent
+	Sinus {
+		id: sinus
+		frieze: frieze
+		y: Theme.barHeight + Theme.corniceHeight
 	}
 
 	PopupWindow {

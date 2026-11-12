@@ -11,6 +11,7 @@ Item {
 	property string icon: "" // Empty draws no icon
 	property color iconColor: valueColor
 	property bool showLabel: Theme.showLabels
+	readonly property bool hovered: pointer.containsMouse // Sinus keeps its drawer down while this is true
 
 	signal activated(int button)
 	signal scrolled(real delta)

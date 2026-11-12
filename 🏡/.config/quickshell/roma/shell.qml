@@ -4,7 +4,9 @@
 // decides what gets instantiated how many times, which is the distinction that has
 // bitten most in building this:
 //
-//   per screen  -- Entablature, because a bar belongs to a monitor
+//   per screen  -- Entablature, because a bar belongs to a monitor. Its drawers
+//                  (Sinus) live inside it; which one is down is the Velum singleton,
+//                  and each bar draws it only if the opener is one of its own items.
 //   exactly one -- Toasts, and the singletons behind it (Tabellarius owns the
 //                  org.freedesktop.Notifications DBus name, which admits one owner;
 //                  N of them would race and lose notifications silently)

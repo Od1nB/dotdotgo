@@ -32,6 +32,15 @@ Shape {
 		"volumeMute": "M3 6.5 h2 l3 -2.5 v8 l-3 -2.5 h-2 z"
 			+ " M10.5 6.5 l3.5 3 M14 6.5 l-3.5 3",
 
+		// A capsule microphone on its stand.
+		"microphone": "M6 3.5 a2 2 0 0 1 4 0 v4 a2 2 0 0 1 -4 0 z"
+			+ " M4 7.5 a4 4 0 0 0 8 0"
+			+ " M8 11.5 v2.5 M6 14 h4",
+		"microphoneMute": "M6 3.5 a2 2 0 0 1 4 0 v4 a2 2 0 0 1 -4 0 z"
+			+ " M4 7.5 a4 4 0 0 0 8 0"
+			+ " M8 11.5 v2.5 M6 14 h4"
+			+ " M2.5 13.5 l11 -11",
+
 		// Ascending bars
 		"network": "M3 12.5 v-1.5 M6.5 12.5 v-4 M10 12.5 v-6.5 M13.5 12.5 v-9",
 		"networkOff": "M3 12.5 v-1.5 M6.5 12.5 v-4 M10 12.5 v-6.5 M13.5 12.5 v-9"

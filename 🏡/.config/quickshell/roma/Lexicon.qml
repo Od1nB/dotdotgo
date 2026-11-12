@@ -59,6 +59,9 @@ Singleton {
 			"via": "VIA", // network (the roads)
 			"sonus": "SONUS", // volume
 			"mutus": "MUTUS", // silent, i.e. muted
+			"vox": "VOX", // microphone, the voice
+			"exitus": "EXITUS", // outputs, the ways sound leaves
+			"aditus": "ADITUS", // inputs, the ways it comes in
 			"carmen": "CARMEN", // media
 			"nuntii": "NUNTII", // notifications
 			"lararium": "LARARIUM", // tray

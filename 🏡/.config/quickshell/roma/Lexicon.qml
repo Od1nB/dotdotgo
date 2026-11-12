@@ -65,6 +65,7 @@ Singleton {
 			"carmen": "CARMEN", // media
 			"nuntii": "NUNTII", // notifications
 			"lararium": "LARARIUM", // tray
+			"reditus": "REDITUS", // return; back out of a tray submenu
 			"hora": "HORA", // clock
 			"dies": "DIES", // date
 			"fasti": "FASTI", // the calendar

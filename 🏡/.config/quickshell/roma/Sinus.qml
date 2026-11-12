@@ -113,15 +113,22 @@ Item {
 
 			// Keep the last drawer's content while folding away.
 			property string shown: ""
+			property var subject: null
 			Connections {
 				target: Velum
 				function onWhichChanged(): void {
-					if (Velum.which !== "")
+					if (Velum.which !== "") {
+						content.subject = Velum.subject
 						content.shown = Velum.which
+					}
+				}
+				function onSubjectChanged(): void {
+					if (Velum.which !== "")
+						content.subject = Velum.subject
 				}
 			}
 
-			sourceComponent: shown === "exitus" ? exitus : shown === "aditus" ? aditus : null
+			sourceComponent: shown === "exitus" ? exitus : shown === "aditus" ? aditus : shown === "lararium" ? lararium : null
 		}
 	}
 
@@ -133,6 +140,11 @@ Item {
 	Component {
 		id: aditus
 		Electio {inputs: true}
+	}
+
+	Component {
+		id: lararium
+		Sacellum {item: content.subject}
 	}
 
 	HoverHandler {id: hover}

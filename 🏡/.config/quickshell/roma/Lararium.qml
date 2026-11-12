@@ -1,5 +1,6 @@
-// LARARIUM -- the tray shrine.
-// Not all features enabled yet, context menu, etc
+// LARARIUM -- the tray shrine. Left activates, middle secondary-activates, right
+// lets the item's own menu down in the drawer (Sacellum). Menu-only items open it
+// on left as well.
 import QtQuick
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
@@ -23,6 +24,7 @@ Item {
 				id: figura
 
 				required property var modelData
+				readonly property bool hovered: pointer.containsMouse // Sinus keeps its drawer down while this is true
 
 				implicitWidth: 24
 				implicitHeight: 24
@@ -52,17 +54,26 @@ Item {
 					id: pointer
 					anchors.fill: parent
 					hoverEnabled: true
-					acceptedButtons: Qt.LeftButton | Qt.MiddleButton
+					acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
 
 					onEntered: Monitum.show(figura, figura.modelData.tooltipTitle || figura.modelData.title || "")
 					onExited: Monitum.hide(figura)
 
 					onClicked: mouse => {
-						if (mouse.button === Qt.LeftButton)
-							figura.modelData.activate()
-						else
-							figura.modelData.secondaryActivate()
+						const item = figura.modelData
+						const wantsMenu = mouse.button === Qt.RightButton
+							|| (mouse.button === Qt.LeftButton && item.onlyMenu)
+						if (wantsMenu) {
+							if (item.hasMenu)
+								Velum.toggleAbout(figura, "lararium", item)
+						} else if (mouse.button === Qt.LeftButton) {
+							item.activate()
+						} else {
+							item.secondaryActivate()
+						}
 					}
+
+					onWheel: wheel => figura.modelData.scroll(wheel.angleDelta.y, false)
 				}
 			}
 		}

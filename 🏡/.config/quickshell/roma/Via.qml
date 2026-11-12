@@ -8,7 +8,14 @@ Modulus {
 	label: Lexicon.label("via")
 	icon: iface === "" ? "networkOff" : "network"
 
-	value: iface === "" ? Lexicon.absent : iface.toUpperCase()
+	value: {
+	    if (iface === "") return Lexicon.absent;
+    
+	    const upper = iface.toUpperCase();
+	    if (upper === "ENP11S0") return "ETH";
+    
+	    return upper;
+	}
 	valueColor: iface === "" ? Theme.crit : Theme.text
 	motto: iface === "" ? Lexicon.motto("viaDown") : ""
 

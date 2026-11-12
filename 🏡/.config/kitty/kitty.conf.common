@@ -46,6 +46,14 @@ map ctrl+shift+n        new_os_window_with_cwd
 
 startup_session         ~/.local/share/kitty/sessions/dotfiles.kitty-session
 
+# kitty >= 0.50: on logout/restart/shutdown, snapshot every instance (tabs,
+# windows, scrollback) and restore it once on the next plain launch, in place of
+# startup_session above -- which stays as the fallback for a cold start. Lives
+# here rather than per-OS because on Linux it degrades to a no-op without an
+# Inhibit v3 desktop portal (GNOME has one). Running programs other than the
+# shell are not relaunched.
+restore_session_after_logout yes
+
 # `session:.` (this tab's session is the active one) rather than `session:~`:
 # despite reading like "current session", `~` matches active-session OR
 # most-recent-session (tabs.py, Tab.matches_query), where most-recent is

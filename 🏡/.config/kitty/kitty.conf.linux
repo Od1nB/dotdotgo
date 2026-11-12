@@ -1,19 +1,5 @@
 include kitty.conf.common
 
-# UNTESTED. There is no Linux kitty install to verify this against; it is a
-# translation of kitty.conf.darwin with super+ in place of cmd+, matching the
-# modifier ghostty/config.linux already uses. Treat it as a starting point.
-#
-# Caveat that comes with super+: desktop environments grab it heavily (GNOME
-# especially), and a WM binding wins before kitty ever sees the key. Expect to
-# free some up at the WM level, or to fall back to ctrl+shift+.
-#
-# Omitted deliberately rather than translated:
-#   background_blur          -- Wayland-compositor dependent, not portable
-#   hide_window_decorations  -- `titlebar-only` is a macOS-only value
-#   macos_option_as_alt      -- macOS only
-#   macos_cycle_through_os_windows{,_backwards}  -- no Linux equivalent action
-
 font_size               15
 
 map super+shift+left    neighboring_window left
@@ -63,8 +49,4 @@ map super+shift+s       save_as_session --use-foreground-process --base-dir ~/.l
 # window, reachable through super+shift+w or `goto_session -1`. The session is
 # live-only until save_as_session writes a file for it.
 map super+shift+n       kitten new_session.py
-
-# Bare `close_session` asks which session to close. Deliberately not the `.`
-# (close active, no prompt) form: the ported session files do not reproduce
-# splits, so closing without re-saving first loses layout for good.
 map super+shift+x       close_session

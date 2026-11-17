@@ -6,20 +6,13 @@
 # --customize-processing=::import::kitty.choose_entry. Nothing there filters as
 # you type, and no goto_session option adds it -- the action takes only
 # --sort-by and --active-only. So the filtering has to live outside kitty.
-#
-# fzf is a good fit because it puts its UI on /dev/tty and only the selection on
-# STDOUT, so capturing STDOUT inside the overlay yields the answer and nothing
-# else. Piping it also keeps it off this process's own STDOUT, which the kitten
-# framework needs: it returns main()'s value to kitty by writing a
-# \x1bP@kitty-kitten-result| escape sequence there (kittens/runner.py).
-#
+# 
 # Wired up by `map cmd+shift+w kitten goto_session_fuzzy.py ~/.local/share/kitty/sessions`.
-
 import os
 import shlex
 import shutil
 import subprocess
-from typing import Callable, Optional
+from collections.abc import Callable
 
 from kitty.boss import Boss
 from kitty.fast_data_types import add_timer
@@ -31,14 +24,11 @@ DEFAULT_SESSION_DIR = '~/.local/share/kitty/sessions'
 # ways stays reachable, exactly as it would be through the built-in action.
 EXTENSIONS = ('.kitty-session', '.kitty_session', '.session')
 
-# kitty.app started by AeroSpace (or Finder) does not inherit the login shell's
-# PATH, so which() alone can come up empty even though fzf is installed.
-# macOS Homebrew (arm64, then Intel), then openSUSE's zypper-installed fzf.
 FZF_FALLBACKS = ('/opt/homebrew/bin/fzf', '/usr/local/bin/fzf', '/usr/bin/fzf')
 
 # See handle_result: the deferred callbacks are closures, so they are kept alive here
 # rather than relying on add_timer's own reference to them.
-_pending: list[Callable[[Optional[int]], None]] = []
+_pending: list[Callable[[int | None], None]] = []
 
 
 def sessions(directory: str) -> list[tuple[str, str]]:
@@ -77,43 +67,68 @@ def main(args: list[str]) -> str:
     # would resolve somewhere unpredictable.
     directory = os.path.expanduser(args[1] if len(args) > 1 else DEFAULT_SESSION_DIR)
 
-    try:
-        entries = sessions(directory)
-    except OSError as e:
-        return fail(f'Could not list session files in {directory}: {e}')
-    if not entries:
-        return fail(f'No session files found in {directory}')
-
     fzf = find_fzf()
     if not fzf:
         return fail('fzf not found on PATH or in ' + ', '.join(FZF_FALLBACKS))
 
-    # The name is column 1 and all that is displayed or matched against (--with-nth
-    # transforms both); the path rides along in column 2 for the preview and, since
-    # fzf still prints the untransformed line, for the return value.
-    stdin = ''.join(f'{name}\t{path}\n' for name, path in entries)
-    result = subprocess.run(
-        [
-            fzf,
-            '--delimiter=\t',
-            '--with-nth=1',
-            '--prompt=session> ',
-            '--layout=reverse',
-            '--no-multi',
-            '--preview=cat {2}',
-            '--preview-window=right,60%',
-        ],
-        input=stdin,
-        text=True,
-        stdout=subprocess.PIPE,
-    )
-    # esc gives 130 and no-match-plus-enter gives 1; both mean "do nothing".
-    if result.returncode != 0:
-        return ''
+    # Looped so that ctrl-x (delete) can drop back into a refreshed list. Done here
+    # rather than with fzf's execute()+reload() binds, which would need a separate
+    # script and an interpreter on PATH -- not a given under AeroSpace, see above.
+    while True:
+        try:
+            entries = sessions(directory)
+        except OSError as e:
+            return fail(f'Could not list session files in {directory}: {e}')
+        if not entries:
+            return fail(f'No session files found in {directory}')
 
-    line = result.stdout.strip()
-    _, _, path = line.partition('\t')
-    return path
+        # The name is column 1 and all that is displayed or matched against (--with-nth
+        # transforms both); the path rides along in column 2 for the preview and, since
+        # fzf still prints the untransformed line, for the return value.
+        stdin = ''.join(f'{name}\t{path}\n' for name, path in entries)
+        result = subprocess.run(
+            [
+                fzf,
+                '--delimiter=\t',
+                '--with-nth=1',
+                '--prompt=session> ',
+                '--layout=reverse',
+                '--no-multi',
+                '--header=enter: open · ctrl-x: delete file',
+                # With --expect, line 1 of the output is the key that ended fzf ('' for
+                # enter) and line 2 is the selection.
+                '--expect=ctrl-x',
+                '--preview=cat {2}',
+                '--preview-window=right,60%',
+            ],
+            check=False, input=stdin,
+            text=True,
+            stdout=subprocess.PIPE,
+        )
+        # esc gives 130 and no-match-plus-enter gives 1; both mean "do nothing".
+        if result.returncode != 0:
+            return ''
+
+        lines = result.stdout.split('\n')
+        key = lines[0].strip()
+        line = lines[1].strip() if len(lines) > 1 else ''
+        _, _, path = line.partition('\t')
+        if not path:
+            return ''
+        if key != 'ctrl-x':
+            return path
+
+        # Deletes the file only. Tabs of that session that are open stay open
+        # (cmd+shift+x closes them), and saving it again re-creates the file.
+        try:
+            answer = input(f'Delete session file {path}? [y/N] ').strip().lower()
+        except (KeyboardInterrupt, EOFError):
+            answer = ''
+        if answer == 'y':
+            try:
+                os.remove(path)
+            except OSError as e:
+                fail(f'Could not delete {path}: {e}')
 
 
 def handle_result(args: list[str], answer: str, target_window_id: int, boss: Boss) -> None:
@@ -136,7 +151,7 @@ def handle_result(args: list[str], answer: str, target_window_id: int, boss: Bos
     # `action` re-parses its argument with kitty.conf's own action-argument rules
     # (rc/action.py hands the string to boss.combine), so a session file whose name
     # contains a space needs the quoting kitty.conf would need.
-    def goto(timer_id: Optional[int] = None) -> None:
+    def goto(timer_id: int | None = None) -> None:
         _pending.clear()
         w = boss.window_id_map.get(target_window_id)
         if w is None:

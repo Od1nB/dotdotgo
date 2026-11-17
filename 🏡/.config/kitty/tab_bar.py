@@ -11,6 +11,7 @@
 # name from the config directory.
 
 import os
+import time
 
 from kitty.fast_data_types import Screen, get_options
 from kitty.tab_bar import DrawData, ExtraData, TabBarData, as_rgb, get_boss, wcswidth
@@ -116,8 +117,24 @@ def _label(tab: TabBarData) -> str:
     return t
 
 
+def _saved_flash(name: str) -> bool:
+    """True for a couple of seconds after save_session.py saved session `name`.
+
+    The kitten parks (session, expiry) on the boss and redraws the bar at the
+    start and end of the window; this only reads it.
+    """
+    try:
+        flash = getattr(get_boss(), 'dotfiles_session_flash', None)
+        if not flash:
+            return False
+        session, expires = flash
+        return session == name and time.monotonic() < expires
+    except Exception:
+        return False
+
+
 def _draw_session_mark(screen: Screen, draw_data: DrawData, name: str) -> None:
-    """Right-aligned session name, recovering wezterm's update-right-status.
+    """Right-aligned session name
 
     kitty has no right status area, so this is drawn after the last tab by
     jumping the cursor to the far edge.
@@ -125,6 +142,8 @@ def _draw_session_mark(screen: Screen, draw_data: DrawData, name: str) -> None:
     if not name:
         return
     text = f' {SESSION_MARK} {name} '
+    if _saved_flash(name):
+        text = '✓ saved ' + text
     width = wcswidth(text)
     # never overwrite a tab: if the tabs already reach the status area, drop it
     if screen.columns - screen.cursor.x < width:

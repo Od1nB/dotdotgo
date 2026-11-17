@@ -41,7 +41,9 @@ map super+enter         new_window_with_cwd
 # fzf, then hands the pick back to goto_session unchanged.
 map super+shift+w       kitten goto_session_fuzzy.py ~/.local/share/kitty/sessions
 map super+ctrl+shift+[  goto_session -1
-map super+shift+s       save_as_session --use-foreground-process --base-dir ~/.local/share/kitty/sessions
+
+# Saves only the active session, back to its own file
+map super+shift+s       kitten save_session.py ~/.local/share/kitty/sessions
 
 # Prompts for a name, then opens a tab in this OS window belonging to a session
 # of that name. The new tab is focused, so it becomes the active session and the

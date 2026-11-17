@@ -52,7 +52,9 @@ map cmd+enter           new_window_with_cwd
 # fzf, then hands the pick back to goto_session unchanged.
 map cmd+shift+w         kitten goto_session_fuzzy.py ~/.local/share/kitty/sessions
 map cmd+ctrl+shift+[    goto_session -1
-map cmd+shift+s         save_as_session --use-foreground-process --base-dir ~/.local/share/kitty/sessions
+
+# Save the active session -- and only it -- back to its own file.
+map cmd+shift+s         kitten save_session.py ~/.local/share/kitty/sessions
 
 # Prompts for a name, then opens a tab in this OS window belonging to a session
 # of that name. The new tab is focused, so it becomes the active session and the
@@ -62,6 +64,6 @@ map cmd+shift+s         save_as_session --use-foreground-process --base-dir ~/.l
 map cmd+shift+n         kitten new_session.py
 
 # Bare `close_session` asks which session to close. Deliberately not the `.`
-# (close active, no prompt) form: the ported session files do not reproduce
-# splits, so closing without re-saving first loses layout for good.
+# (close active, no prompt) form: closing drops everything changed since the
+# last cmd+shift+s, so it should take a deliberate pick.
 map cmd+shift+x         close_session

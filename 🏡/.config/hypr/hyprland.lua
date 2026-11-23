@@ -64,7 +64,7 @@ os.execute(string.format("notify-send 'the dbuggo' '%s'", theme.name))
 
 -- Set programs that you use
 local terminal    = "kitty"
-local fileManager = "dolphin"
+local fileManager = terminal .. " -e yazi"
 local menu = [[cd "${HOME}/.config/wofi" || exit; ]]
           .. [[exec wofi --show drun -I --style "${HOME}/.config/wofi/style.css.]] .. theme.name .. [["]]
 

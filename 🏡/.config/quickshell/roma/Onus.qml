@@ -9,7 +9,7 @@ Modulus {
 	motto: Lexicon.motto("onus")
 	icon: "chip"
 
-	value: pct < 0 ? Lexicon.absent : `${pct}%`
+	value: pct < 0 ? Lexicon.absent : `${String(pct).padStart(2, ' ')}%`
 	valueColor: pct >= 90 ? Theme.crit : pct >= 65 ? Theme.warn : Theme.text
 
 	property int pct: -1
